@@ -29,7 +29,7 @@ variable "subnets" {
 }
 
 variable "security_groups" {
-  type        = set(string)
+  type        = list(string)
   description = "IDs of the extra security groups you want the task to have access to."
 }
 
