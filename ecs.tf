@@ -68,9 +68,9 @@ resource "aws_ecs_service" "aws-ecs-service" {
   dynamic "capacity_provider_strategy" {
     for_each = var.capacity_providers
     content {
-      capacity_provider = capacity_provider_strategy.capacity_provider
-      base              = capacity_provider_strategy.base
-      weight            = capacity_provider_strategy.weight
+      capacity_provider = capacity_provider_strategy.value.capacity_provider
+      base              = capacity_provider_strategy.value.base
+      weight            = capacity_provider_strategy.value.weight
     }
   }
 
