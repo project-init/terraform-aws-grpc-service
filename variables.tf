@@ -8,6 +8,11 @@ variable "environment" {
   description = "The environment to deploy the grpc service to."
 }
 
+variable "ecs_cluster_arn" {
+  type        = string
+  description = "The ARN of the ecs cluster to deploy the service on."
+}
+
 variable "ecs_cluster_name" {
   type        = string
   description = "The name of the ecs cluster to deploy the service on."
