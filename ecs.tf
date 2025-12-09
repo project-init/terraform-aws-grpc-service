@@ -82,7 +82,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   network_configuration {
     subnets          = var.subnets
     assign_public_ip = false
-    security_groups  = concat([aws_security_group.service.id], var.security_groups)
+    security_groups  = concat([aws_security_group.service.id, var.lb_security_group_id], var.security_groups)
   }
 
   load_balancer {
