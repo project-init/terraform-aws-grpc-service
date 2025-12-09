@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   ]
   DEFINITION
 
-  requires_compatibilities = ["EC2"]
+  requires_compatibilities = [var.use_ec2 ? "EC2" : "FARGATE"]
   network_mode             = "awsvpc"
   memory                   = var.memory
   cpu                      = var.cpu
@@ -58,7 +58,7 @@ data "aws_ecs_task_definition" "main" {
 
 resource "aws_ecs_service" "aws-ecs-service" {
   name                   = var.service_name
-  cluster                = var.ecs_cluster_name
+  cluster                = var.ecs_cluster_arn
   task_definition        = "${aws_ecs_task_definition.aws-ecs-task.family}:${max(aws_ecs_task_definition.aws-ecs-task.revision, data.aws_ecs_task_definition.main.revision)}"
   desired_count          = var.desired_count
   force_new_deployment   = true
@@ -68,9 +68,9 @@ resource "aws_ecs_service" "aws-ecs-service" {
   dynamic "capacity_provider_strategy" {
     for_each = var.capacity_providers
     content {
-      capacity_provider = capacity_provider_strategy.capacity_provider
-      base              = capacity_provider_strategy.base
-      weight            = capacity_provider_strategy.weight
+      capacity_provider = capacity_provider_strategy.value.capacity_provider
+      base              = capacity_provider_strategy.value.base
+      weight            = capacity_provider_strategy.value.weight
     }
   }
 
@@ -82,7 +82,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   network_configuration {
     subnets          = var.subnets
     assign_public_ip = false
-    security_groups  = concat([aws_security_group.service.id], var.security_groups)
+    security_groups  = concat([aws_security_group.service.id, var.lb_security_group_id], var.security_groups)
   }
 
   load_balancer {

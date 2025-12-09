@@ -8,6 +8,11 @@ variable "environment" {
   description = "The environment to deploy the grpc service to."
 }
 
+variable "ecs_cluster_arn" {
+  type        = string
+  description = "The ARN of the ecs cluster to deploy the service on."
+}
+
 variable "ecs_cluster_name" {
   type        = string
   description = "The name of the ecs cluster to deploy the service on."
@@ -29,8 +34,14 @@ variable "subnets" {
 }
 
 variable "security_groups" {
-  type        = set(string)
+  type        = list(string)
   description = "IDs of the extra security groups you want the task to have access to."
+}
+
+variable "use_ec2" {
+  type        = bool
+  default     = false
+  description = "Whether to deploy the service on an ec2 backed service or fargate."
 }
 
 variable "capacity_providers" {

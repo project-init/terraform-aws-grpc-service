@@ -1,6 +1,11 @@
 # Project Init AWS Grpc Service
 
-Module used to help create the ECS and Load balancing infrastructure for a Grpc server.
+Module used to help create the ECS and Load balancing infrastructure for a Grpc server. This is an opinionated module,
+where the outcome should result in a grpc service which registers the default grpc healthcheck, existing at
+
+`<service>.<domain>:443`
+
+Assumes you have an existing load balancer and https listener you will attach to.
 
 ## Quick Start
 
@@ -70,6 +75,7 @@ No modules.
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | The cpu value to give to the ecs task. | `number` | `256` | no |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | Desired count of tasks to run. This is ignored after the first apply. | `number` | `0` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain hosting the service. (i.e. 'your-domain.com') | `string` | n/a | yes |
+| <a name="input_ecs_cluster_arn"></a> [ecs\_cluster\_arn](#input\_ecs\_cluster\_arn) | The ARN of the ecs cluster to deploy the service on. | `string` | n/a | yes |
 | <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | The name of the ecs cluster to deploy the service on. | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment to deploy the grpc service to. | `string` | n/a | yes |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | The environment variables to use for the service. | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]` | no |
@@ -84,9 +90,10 @@ No modules.
 | <a name="input_min_capacity"></a> [min\_capacity](#input\_min\_capacity) | The minimum amount of the tasks to run. | `number` | `0` | no |
 | <a name="input_priority"></a> [priority](#input\_priority) | Priority to use for the load balancer traffic. | `number` | `100` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to use for the service. | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | IDs of the extra security groups you want the task to have access to. | `set(string)` | n/a | yes |
+| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | IDs of the extra security groups you want the task to have access to. | `list(string)` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service. | `string` | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | The subnets to deploy the service in to. | `set(string)` | n/a | yes |
+| <a name="input_use_ec2"></a> [use\_ec2](#input\_use\_ec2) | Whether to deploy the service on an ec2 backed service or fargate. | `bool` | `false` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID being deployed to. | `string` | n/a | yes |
 
 ## Outputs

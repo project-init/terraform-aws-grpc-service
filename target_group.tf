@@ -5,7 +5,7 @@ resource "aws_lb_target_group" "service" {
   protocol             = "HTTP"
   protocol_version     = "GRPC"
   deregistration_delay = 30
-  vpc_id               = local.network_account_map.vpc_id
+  vpc_id               = var.vpc_id
 
   health_check {
     port                = 9001
