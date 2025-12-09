@@ -1,4 +1,4 @@
-module "version" {
+module "grpc_service" {
   source = "project-init/grpc-service/aws"
   # Project Init recommends pinning every module to a specific version
   # version = "vX.X.X"
