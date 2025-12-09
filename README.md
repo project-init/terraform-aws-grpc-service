@@ -1,6 +1,11 @@
 # Project Init AWS Grpc Service
 
-Module used to help create the ECS and Load balancing infrastructure for a Grpc server.
+Module used to help create the ECS and Load balancing infrastructure for a Grpc server. This is an opinionated module,
+where the outcome should result in a grpc service which registers the default grpc healthcheck, existing at
+
+`<service>.<domain>:443`
+
+Assumes you have an existing load balancer and https listener you will attach to.
 
 ## Quick Start
 
