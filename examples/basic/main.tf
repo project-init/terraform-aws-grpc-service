@@ -9,6 +9,7 @@ module "version" {
 
   # ECS Cluster/Service
   ecs_cluster_name = "cluster"
+  ecs_cluster_arn  = "cluster:arn"
   subnets = [
     "subnet-1"
   ]
@@ -17,7 +18,7 @@ module "version" {
   ]
 
   # ECS Task
-  image        = "111111111111.dkr.ecr.us-east-1.amazonaws.com/api:v0.1.0"
+  image = "111111111111.dkr.ecr.us-east-1.amazonaws.com/api:v0.1.0"
   environment_variables = [
     {
       name  = "REGION"
@@ -33,11 +34,11 @@ module "version" {
   max_capacity  = 1
 
   # Load Balancer/Routing
-  vpc_id = "vpc-id"
-  domain = "my-domain.com"
-  hosted_zone_id = "zone-id"
+  vpc_id               = "vpc-id"
+  domain               = "my-domain.com"
+  hosted_zone_id       = "zone-id"
   lb_security_group_id = "lb-sg-id"
-  lb_dns_name = "lb-dns-name"
-  lb_zone_id = "lb-zone-id"
-  https_listener_arn = "listener-arn"
+  lb_dns_name          = "lb-dns-name"
+  lb_zone_id           = "lb-zone-id"
+  https_listener_arn   = "listener-arn"
 }

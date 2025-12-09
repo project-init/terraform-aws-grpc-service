@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   ]
   DEFINITION
 
-  requires_compatibilities = ["EC2"]
+  requires_compatibilities = [var.use_ec2 ? "EC2" : "FARGATE"]
   network_mode             = "awsvpc"
   memory                   = var.memory
   cpu                      = var.cpu

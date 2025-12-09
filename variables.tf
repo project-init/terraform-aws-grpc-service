@@ -38,6 +38,12 @@ variable "security_groups" {
   description = "IDs of the extra security groups you want the task to have access to."
 }
 
+variable "use_ec2" {
+  type        = bool
+  default     = false
+  description = "Whether to deploy the service on an ec2 backed service or fargate."
+}
+
 variable "capacity_providers" {
   default = []
   type = set(object({
