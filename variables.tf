@@ -169,3 +169,8 @@ variable "priority" {
   nullable    = false
   description = "Priority to use for the load balancer traffic."
 }
+
+variable "create_domain" {
+  type = bool
+  description = "Whether to create the domain for the service. Set to false if deploying a prelive service which routes via the same domain as the live service."
+}

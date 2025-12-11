@@ -1,4 +1,6 @@
 resource "aws_route53_record" "domain" {
+  count = var.create_domain ? 1 : 0
+
   name = local.service_domain
   type = "A"
 

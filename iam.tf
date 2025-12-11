@@ -38,7 +38,6 @@ data "aws_iam_policy_document" "ecs_exec_policy" {
   }
 }
 
-
 resource "aws_iam_policy" "ecs_exec_policy" {
   name   = "${var.service_name}-ecs-exec-policy"
   policy = data.aws_iam_policy_document.ecs_exec_policy.json
