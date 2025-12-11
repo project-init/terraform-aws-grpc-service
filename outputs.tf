@@ -1,3 +1,8 @@
+output "service_name" {
+  value       = var.service_name
+  description = "The name of the service."
+}
+
 output "service_iam_role_arn" {
   value       = aws_iam_role.service.arn
   description = "The ARN of the IAM role for the gRPC service"

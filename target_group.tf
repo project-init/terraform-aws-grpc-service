@@ -8,7 +8,7 @@ resource "aws_lb_target_group" "service" {
   vpc_id               = var.vpc_id
 
   health_check {
-    port                = 9001
+    port                = var.container_port
     healthy_threshold   = 2
     interval            = 5
     timeout             = 2
