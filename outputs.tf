@@ -1,5 +1,5 @@
 output "service_name" {
-  value = var.service_name
+  value       = var.service_name
   description = "The name of the service."
 }
 

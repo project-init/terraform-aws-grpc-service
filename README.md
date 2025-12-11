@@ -73,6 +73,7 @@ No modules.
 | <a name="input_capacity_providers"></a> [capacity\_providers](#input\_capacity\_providers) | List of capacity providers to use for distributing tasks. Should primarily be used when utilizing ec2 backed ecs. | <pre>set(object({<br/>    capacity_provider = string<br/>    base              = number<br/>    weight            = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | The port the grpc service runs on. | `number` | `9001` | no |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | The cpu value to give to the ecs task. | `number` | `256` | no |
+| <a name="input_create_domain"></a> [create\_domain](#input\_create\_domain) | Whether to create the domain for the service. Set to false if deploying a prelive service which routes via the same domain as the live service. | `bool` | n/a | yes |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | Desired count of tasks to run. This is ignored after the first apply. | `number` | `0` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain hosting the service. (i.e. 'your-domain.com') | `string` | n/a | yes |
 | <a name="input_ecs_cluster_arn"></a> [ecs\_cluster\_arn](#input\_ecs\_cluster\_arn) | The ARN of the ecs cluster to deploy the service on. | `string` | n/a | yes |
@@ -91,6 +92,7 @@ No modules.
 | <a name="input_priority"></a> [priority](#input\_priority) | Priority to use for the load balancer traffic. | `number` | `100` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to use for the service. | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | IDs of the extra security groups you want the task to have access to. | `list(string)` | n/a | yes |
+| <a name="input_service_domain"></a> [service\_domain](#input\_service\_domain) | The service domain to use as a prefix for traffic routing. If an empty string is given, the prefix defaults to the service name. | `string` | `""` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service. | `string` | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | The subnets to deploy the service in to. | `set(string)` | n/a | yes |
 | <a name="input_use_ec2"></a> [use\_ec2](#input\_use\_ec2) | Whether to deploy the service on an ec2 backed service or fargate. | `bool` | `false` | no |
@@ -103,4 +105,5 @@ No modules.
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The ID of the security group for the gRPC service |
 | <a name="output_service_iam_role_arn"></a> [service\_iam\_role\_arn](#output\_service\_iam\_role\_arn) | The ARN of the IAM role for the gRPC service |
 | <a name="output_service_iam_role_name"></a> [service\_iam\_role\_name](#output\_service\_iam\_role\_name) | The name of the IAM role for the gRPC service |
+| <a name="output_service_name"></a> [service\_name](#output\_service\_name) | The name of the service. |
 <!-- END_TF_DOCS -->
