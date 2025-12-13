@@ -1,5 +1,11 @@
+data "aws_region" "current" {}
+
 locals {
-  task_env_variables = concat(var.environment_variables, [{ name : "ENVIRONMENT", value : var.environment }])
+  task_env_variables = concat(var.environment_variables, [
+    { name : "ENV", value : var.environment },
+    // This is a commonly overlooked variable as it is needed to have your aws default config correctly manage the region.
+    { name : "AWS_REGION", value : data.aws_region.current }
+  ])
 }
 
 resource "aws_ecs_task_definition" "aws-ecs-task" {
@@ -17,6 +23,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
       "image": "${var.image}",
       "entryPoint": [],
       "environment": ${jsonencode(local.task_env_variables)},
+      "secrets": ${jsonencode(var.secrets)},
       "essential": true,
       "logConfiguration": {
         "logDriver": "awslogs",
