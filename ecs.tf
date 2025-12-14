@@ -23,7 +23,6 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
       "image": "${var.image}",
       "entryPoint": [],
       "environment": ${jsonencode(local.task_env_variables)},
-      "secrets": ${jsonencode(var.secrets)},
       "essential": true,
       "logConfiguration": {
         "logDriver": "awslogs",
