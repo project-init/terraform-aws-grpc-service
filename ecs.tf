@@ -4,7 +4,7 @@ locals {
   // AWS_REGION is needed to have your aws default config correctly manage the region.
   task_env_variables = concat(var.environment_variables, [
     { name : "ENV", value : var.environment },
-    { name : "AWS_REGION", value : data.aws_region.current },
+    // { name : "AWS_REGION", value : data.aws_region.current },
   ])
 }
 
