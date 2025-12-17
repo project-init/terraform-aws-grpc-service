@@ -70,6 +70,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   desired_count          = var.desired_count
   force_new_deployment   = var.force_new_deployment
   enable_execute_command = true
+  launch_type            = var.use_ec2 ? "EC2" : "FARGATE"
   propagate_tags         = "SERVICE"
 
   dynamic "capacity_provider_strategy" {
