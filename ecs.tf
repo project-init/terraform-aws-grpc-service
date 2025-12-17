@@ -81,9 +81,12 @@ resource "aws_ecs_service" "aws-ecs-service" {
     }
   }
 
-  ordered_placement_strategy {
-    type  = "spread"
-    field = "attribute:ecs.availability-zone"
+  dynamic "ordered_placement_strategy" {
+    for_each = var.ordered_placement_strategies
+    content {
+      type = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
   }
 
   network_configuration {

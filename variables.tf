@@ -54,6 +54,15 @@ variable "capacity_providers" {
   description = "List of capacity providers to use for distributing tasks. Should primarily be used when utilizing ec2 backed ecs."
 }
 
+variable "ordered_placement_strategies" {
+  default = []
+  type = set(object({
+    type = string
+    field = string
+  }))
+  description = "List of ordered placement strategies to use for distributing tasks. Should primarily be used when utilizing ec2 backed ecs."
+}
+
 variable "container_port" {
   default     = 9001
   type        = number
